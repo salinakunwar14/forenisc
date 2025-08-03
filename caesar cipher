@@ -1,0 +1,31 @@
+#include <stdio.h>
+
+void caesar(char *text, int key, int encrypt) {
+    for (int i = 0; text[i]; i++) {
+        char ch = text[i];
+        if (ch >= 'A' && ch <= 'Z')
+            text[i] = (ch - 'A' + (encrypt ? key : 26 - key)) % 26 + 'A';
+        else if (ch >= 'a' && ch <= 'z')
+            text[i] = (ch - 'a' + (encrypt ? key : 26 - key)) % 26 + 'a';
+    }
+}
+
+int main() {
+    char msg[100];
+    int key;
+
+    printf("Message: ");
+    fgets(msg, sizeof(msg), stdin);
+
+    printf("Key: ");
+    scanf("%d", &key);
+
+    caesar(msg, key, 1);
+    printf("Encrypted: %s", msg);
+
+    caesar(msg, key, 0);
+    printf("Decrypted: %s", msg);
+
+    return 0;
+}
+
